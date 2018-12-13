@@ -65,9 +65,14 @@ private static IWebHost BuildWebHost(string[] args)
 
 Then set the stateless ASP.NET Core Identity project as a startup project. Open the console package manager and set the ASP.NET Cora app
 as the default project and apply the migration and update the database as usual. 
+
 `add-migration initial`
+
 `update-database`
 
 Reset the Service Fabric project to be the startup project and run the app. It should now work.
 
-Once that done you can move the DefaultConnection to be read from the settings files of the Service Fabric app and ultimately Azure Key Vault.
+Once that done you can move the DefaultConnection to be read from the settings files of the Service Fabric app and ultimately Azure Key Vault. You can also remove the private method returning `IWebHost`
+to configure explicitly through extension methods in `WebIdentity.cs` to invoke EF tooling and possibly reading from `appsettings.json` if that is needed.
+
+Let me know if you have some clever improvments, I am aware that is only a temporary solution.
