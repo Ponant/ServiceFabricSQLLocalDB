@@ -39,7 +39,7 @@ Unknown location
 SqlException: A network-related or instance-specific error occurred while establishing a connection to SQL Server. The server was not found or was not accessible. Verify that the instance name is correct and that SQL Server is configured to allow remote connections. (provider: SQL Network Interfaces, error: 50 - Local Database Runtime error occurred. Cannot create an automatic instance. See the Windows Application event log for error details.
 )`
 
-It seems the issues comes from how Service Fabric implements permissions. The best answer was found here
+It seems the issue comes from how Service Fabric implements permissions. The best answer was found here
 https://stackoverflow.com/questions/36401991/using-localdb-with-service-fabric
 
 From a command prompt, run 
@@ -55,7 +55,7 @@ This part was the most difficult one for me as I had little experience in permis
 
 If you now run the application and register you will get the usual prompt to apply migrations and update the database. But an error will occur saying the migrations could not be applied.
 You won't ba able to do that from a command line. The reason is probably because that EF tools are not configured in the Service Fabric template.
-The most brutal way of doing this is to set in `Program.cs` of the statless ASP:ET Core project:
+The most brutal way of doing this is to set in `Program.cs` of the statless ASP.NET Core project:
 
 ```c#
 private static IWebHost BuildWebHost(string[] args)
@@ -64,7 +64,7 @@ private static IWebHost BuildWebHost(string[] args)
 }
 ```
 
-Then set the stateless ASP.NET Core Identity project as a startup project. Open the console package manager and set the ASP.NET Cora app
+Then set the stateless ASP.NET Core Identity project as a startup project. Open the `Package Manager Console` and set the ASP.NET Core project
 as the default project and apply the migration and update the database as usual. 
 
 `add-migration initial`
@@ -73,7 +73,7 @@ as the default project and apply the migration and update the database as usual.
 
 Reset the Service Fabric project to be the startup project and run the app. It should now work.
 
-Once that done you can move the DefaultConnection to be read from the settings files of the Service Fabric app and ultimately Azure Key Vault. You can also remove the private method returning `IWebHost`
+Once that done you can move the `DefaultConnection` to be read from the settings files of the Service Fabric app and ultimately Azure Key Vault. You can also remove the private method returning `IWebHost`
 to configure explicitly through extension methods in `WebIdentity.cs` to invoke EF tooling and possibly reading from `appsettings.json` if that is needed.
 
-Let me know if you have some clever improvments, I am aware that is only a temporary solution.
+Since this method can certainly be improved, I welcome more straightforward solutions.
