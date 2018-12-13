@@ -45,6 +45,7 @@ From a command prompt, run
 `sqllocaldb share MSSqlLocalDB SharedDB`
 
 Update the configuration string to
+
 `var DefaultConnection = @"Data Source=(localdb)\.\SharedDB;Initial Catalog=WebIdentityDb;Integrated Security=true;";`
 
 and configure the `SQL Server Management Studio` following the link above. Also see
