@@ -35,9 +35,15 @@ namespace WebIdentity
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            //var DefaultConnection = "Server=(localdb)\\mssqllocaldb;Database=WebIdentityDb;Trusted_Connection=True;MultipleActiveResultSets=true;";
+            var DefaultConnection = @"Data Source=(localdb)\.\SharedDB;Initial Catalog=WebIdentityDb;Integrated Security=true;";
+
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
+              options.UseSqlServer(DefaultConnection));
+
+            //services.AddDbContext<ApplicationDbContext>(options =>
+            //    options.UseSqlServer(
+            //        Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();

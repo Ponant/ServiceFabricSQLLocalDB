@@ -1,4 +1,6 @@
-﻿using Microsoft.ServiceFabric.Services.Runtime;
+﻿using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.ServiceFabric.Services.Runtime;
 using System;
 using System.Diagnostics;
 using System.Threading;
@@ -33,6 +35,10 @@ namespace WebIdentity
                 ServiceEventSource.Current.ServiceHostInitializationFailed(e.ToString());
                 throw;
             }
+        }
+        private static IWebHost BuildWebHost(string[] args)
+        {
+            return WebHost.CreateDefaultBuilder(args).UseStartup<Startup>().Build();
         }
     }
 }
