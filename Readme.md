@@ -77,4 +77,4 @@ Reset the Service Fabric project to be the startup project and run the app. It s
 Once that done you can move the `DefaultConnection` to be read from the settings files of the Service Fabric app and ultimately Azure Key Vault. You can also remove the private method returning `IWebHost`
 to instead configure explicitly EF Tooling through extension methods in `WebIdentity.cs`, and possibly the same for reading from `appsettings.json` if that is needed.
 
-Since this method can certainly be improved, I welcome more straightforward solutions.
+Since this method can certainly be improved, more straightforward solutions are welcomed.
