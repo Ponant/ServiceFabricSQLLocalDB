@@ -2,6 +2,7 @@
 
 This template is a quick-and-dirty way to have Service Fabric correctly read from a local SQL db.
 It is related to the issue https://github.com/aspnet/EntityFrameworkCore/issues/13969
+Notice that the program will throw if you do not set the correct permission for the local SQL db as explained below.
 
 Create a new Service Fabric project.
 -------------------------------------
